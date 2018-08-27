@@ -1,11 +1,161 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>ClubMate</title>
+    <link rel='stylesheet' href='/stylesheets/landing.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a class="active item">Home</a>
+      <a class="item" href="#aboutUs">About Us</a>
+      <a class="item">Company</a>
+      <a class="item">Careers</a>
+      <div class="right menu">
+        <div class="item">
+          <a class="ui button" href="/login">Log in</a>
+        </div>
+        <div class="item">
+          <a class="ui primary button">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item">Home</a>
+    <a class="item" href="#aboutUs">About Us</a>
+    <a class="item">Company</a>
+    <a class="item">Careers</a>
+    <a class="item">Login</a>
+    <a class="item">Signup</a>
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="active item">Home</a>
+          <a class="item" href="#aboutUs">About Us</a>
+          <a class="item" href="#gettingStarted">Getting Started</a>
+          <a class="item">Careers</a>
+          <div class="right item">
+            <a class="ui inverted button" href="/login">Log in</a>
+            <a class="ui inverted button">Sign Up</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          ClubMate
+        </h1>
+        <h2>An Application to help Clubs in VIT Streamline a few of their functions</h2>
+        <!--<div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>-->
+      </div>
+
+    </div>
+
+    <div id="aboutUs" class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">About Us</h3>
+            <p style="text-align: justify">We are 2 college students who came up with the idea of this website in order to aid the members of the
+                vast multitude of clubs and chapter in VIT in managing and scheduling club tasks. The website will give
+                the free slots in an easy-to-access user-friendly layout.
+            </p>
+            <!--<h3 class="ui header">We Make Bananas That Can Dance</h3>-->
+            <!--<p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>-->
+          </div>
+          <div class="six wide right floated column">
+            <img src="./images/timetable_sample.png" class="ui large bordered rounded image">
+          </div>
+        </div>
+        <!--<div class="row">-->
+          <!--<div class="center aligned column">-->
+            <!--<a class="ui huge button">Check Them Out</a>-->
+          <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+
+
+    <div class="ui vertical stripe quote segment">
+      <div class="ui equal width stackable internally celled grid">
+        <div class="center aligned row">
+          <div class="column">
+            <h3>Hemant H Kumar</h3>
+            <p>16BCE2004</p>
+          </div>
+          <div class="column">
+            <h3>Rituraj Biswas</h3>
+            <p>16BCE0950</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe segment">
+      <div class="ui text container">
+        <h3 class="ui header" id="gettingStarted">Getting Started</h3>
+        <h4 style="text-align:left;font-weight:bold;font-size: 20px;text-decoration: underline;">Admin</h4>
+        <p style="text-align: justify;">
+          If you belong to the club board, create a single admin account for the club. After the account has been created
+          you will get an invite link that you can share with other members of the club. Anyonw with the link will be able
+          join, <b>hence share with discretion.<b>
+        </p>
+        <h4 class="ui horizontal header divider">
+          <a>Other Users</a>
+        </h4>
+        <h4 style="text-align:left;font-weight:bold;font-size: 20px;text-decoration: underline;">Other User</h4>
+        <p style="text-align: justify; font-weight: normal">
+          If you are a non-board member of the club. Sign in as user. You can join multiple clubs by using the invite link
+          provided by the admin. Once you are in a group, you can view the free slots of all members.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <!--<div class="three wide column">-->
+            <!--<h4 class="ui inverted header">About</h4>-->
+            <!--<div class="ui inverted link list">-->
+              <!--<a href="#" class="item">Sitemap</a>-->
+              <!--<a href="#" class="item">Contact Us</a>-->
+              <!--<a href="#" class="item">Religious Ceremonies</a>-->
+              <!--<a href="#" class="item">Gazebo Plans</a>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="three wide column">-->
+            <!--<h4 class="ui inverted header">Services</h4>-->
+            <!--<div class="ui inverted link list">-->
+              <!--<a href="#" class="item">Banana Pre-Order</a>-->
+              <!--<a href="#" class="item">DNA FAQ</a>-->
+              <!--<a href="#" class="item">How To Access</a>-->
+              <!--<a href="#" class="item">Favorite X-Men</a>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="wide column">
+            <h4 class="ui inverted header">Developed For</h4>
+            <p>Internet and Web Programming (CSE3002) in Fall Semester 2018</p>
+            <p>Faculty:     Arun Kumar G</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </body>
 </html>
