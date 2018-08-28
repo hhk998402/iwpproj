@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- Modal -->
+<!-- Group ID Modal -->
 <div class="container">
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -39,6 +39,37 @@
     </div>
 </div>
 
+<!-- Profile Modal -->
+<div class="container">
+    <div class="modal fade" id="profileModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Profile</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <!--<p>Some text in the modal.</p>-->
+                        <h2 style="text-align: center;">Hemant H Kumar</h2>
+                        <p>Register Number: <input type="text" placeholder="16BCE2004" disabled> </p>
+                        <p>E-Mail ID: <input type="text" placeholder="hemant.hari.kumar@gmail.com" disabled> </p>
+                        <p>Mobile Number: <input type="text" placeholder="9980452947" disabled> </p>
+                        <p>Clubs: <ul> <li>IEEE VIT Chapter</li> </ul></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="#">ClubMate</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,20 +81,21 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Choose Group</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="#">Link</a>-->
+            <!--</li>-->
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Find other Club Mates</a>
             </li>
-            <!--<li class="nav-item dropdown">-->
-                <!--<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
-                <!--<div class="dropdown-menu" aria-labelledby="dropdown04">-->
-                    <!--<a class="dropdown-item" href="#">Action</a>-->
-                    <!--<a class="dropdown-item" href="#">Another action</a>-->
-                    <!--<a class="dropdown-item" href="#">Something else here</a>-->
-                <!--</div>-->
-            <!--</li>-->
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" style="float:right;text-align:right;">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hemant H Kumar</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
+                    <a class="dropdown-item" href="/">Logout</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
@@ -172,6 +204,13 @@
 </div>
 
 </body>
+<script>
+    var input = document.querySelectorAll('input');
+    var i;
+    for(i=0; i<input.length; i++){
+        input[i].setAttribute('size',input[i].getAttribute('placeholder').length+2);
+    }
+</script>
 </html>
 
 
