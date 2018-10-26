@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>IWP Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='./stylesheets/style1.css' />
+</head>
+<body>
+
+<!-- Group ID Modal -->
+<div class="container">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter Group ID</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!--<p>Some text in the modal.</p>-->
+                    <input type="text" placeholder="Enter your Group ID" id="clubID">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="console.log('hemant');">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Profile Modal -->
+<div class="container">
+    <div class="modal fade" id="profileModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Profile</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <!--<p>Some text in the modal.</p>-->
+                        <h2 style="text-align: center;">Hemant H Kumar</h2>
+                        <p>Register Number: <input type="text" placeholder="16BCE2004" disabled> </p>
+                        <p>E-Mail ID: <input type="text" placeholder="hemant.hari.kumar@gmail.com" disabled> </p>
+                        <p>Mobile Number: <input type="text" placeholder="9980452947" disabled> </p>
+                        <p>Clubs: <ul> <li>IEEE VIT Chapter</li> </ul></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">ClubMate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Choose Group</a>
+            </li>
+            <!--<li class="nav-item">-->
+            <!--<a class="nav-link" href="#">Link</a>-->
+            <!--</li>-->
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Find other Club Mates</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" style="float:right;text-align:right;">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hemant H Kumar</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
+                    <a class="dropdown-item" href="/">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid" style="margin-top:80px">
+    <h3 style="text-align:center;" id="welcomeMsg">Welcome, </h3>
+    <p> </p>
+    <header>
+        <h3 style="text-align:center; color:salmon">Your Members:</h3>
+    </header>
+    <h2>Club Members</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="table-responsive">
+                    <center>
+                    <table style="text-align:center" id="clubMembers" summary="The following table shows the poeple who are part of this club" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Registration Number</th>
+                            <th>EMail ID</th>
+                            <th>Name</th>
+                            <th>Months Person has been Part of Club</th>
+                            <th>View Timetable</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    </center>
+                </div><!--end of .table-responsive-->
+            </div>
+        </div>
+    </div>
+
+    <!--<h1>Scroll this page to see the effect</h1>-->
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    function viewTimeTable(){
+        window.location.replace("/timetable?email=hemant.hari.kumar@gmail.com");
+    }
+    var club = <%-JSON.stringify(club)%>;
+    // $(".timeTableError").hide();
+    // console.log(timeTable);
+    // if(!timeTable){
+    //     $(".timeTableError").show();
+    //     $(".responsive-table").hide();
+    // }
+    $("#welcomeMsg").text("Welcome, "+<%-JSON.stringify(club)%>);
+
+    var members = <%-JSON.stringify(members)%>;
+    for(var i=0;i< members.length;i++) {
+        var newRowContent = "<tr><td>" + members[i].regNo + "</td><td>" + members[i].email + "</td><td>" + members[i].name + "</td><td>15</td><td><button onclick='viewTimeTable();'>View</button></td</tr>";
+        $("#clubMembers tbody").append(newRowContent);
+    }
+    // var input = document.querySelectorAll('input');
+    // var i;
+    // for(i=0; i<input.length; i++){
+    //     input[i].setAttribute('size',input[i].getAttribute('placeholder').length+2);
+    // }
+</script>
+</html>
+
+

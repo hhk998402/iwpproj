@@ -10,6 +10,10 @@
         <div class="form sign-in">
             <h2>Welcome back,</h2>
             <label>
+                <span>Admin Login?</span>
+                <input type="checkbox" id="adminCheck"/>
+            </label>
+            <label>
                 <span>Email</span>
                 <input type="email" id="loginEmail"/>
             </label>
@@ -36,24 +40,29 @@
                 </div>
             </div>
             <div class="form sign-up">
-                <h2>Register with us,</h2>
+                <h2>Register with us (for Student Login). For Club Admin Login, please go <a href="/adminSignup">here</a></h2>
                 <label>
                     <span>Name</span>
-                    <input type="text" />
+                    <input type="text" id="signupName" />
                 </label>
                 <label>
                     <span>Email</span>
-                    <input type="email" />
+                    <input type="email" id="signupEmail" />
+                </label>
+                <label>
+                    <span>Registration Number</span>
+                    <input type="text" id="signupRegNo" />
                 </label>
                 <label>
                     <span>Password</span>
-                    <input type="password" />
+                    <input type="password" id="signupPasswd" />
                 </label>
-                <button type="button" class="submit">Sign Up</button>
+                <button type="button" class="submit" onclick="signupAuth();">Sign Up</button>
             </div>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="./javascripts/loginAction.js"></script>
 <script>
     function loginAuth(){
@@ -61,6 +70,7 @@
         console.log(document.getElementById("loginPasswd").value);
         var email = document.getElementById("loginEmail").value;
         var passwd = document.getElementById("loginPasswd").value;
+        var admin = $("#adminCheck").is(":checked");
         var Emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var errMsg = 'Errors in Input: ';
         var chk = false;
@@ -78,7 +88,80 @@
             alert(errMsg);
         }
         else{
-            window.location.replace("/home");
+            var data = JSON.stringify({email:email, passwd:passwd,admin:admin});
+            $.ajax({
+                url: '/login',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    // console.log(data);
+                    if(data.code && data.code === 1){
+                        alert(data.message);
+                    }
+                    else {
+                        window.location.replace('/home');
+                    }
+                },
+                data:data
+            });
+        }
+    }
+
+    function signupAuth(){
+        console.log(document.getElementById("signupEmail").value);
+        console.log(document.getElementById("signupPasswd").value);
+        var email = document.getElementById("signupEmail").value;
+        var passwd = document.getElementById("signupPasswd").value;
+        var regNo = document.getElementById("signupRegNo").value;
+        var name = document.getElementById("signupName").value;
+
+        var Emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var regNoRe = /^1[6,7,8][a-zA-Z]{3}[0-9]{4}$/;
+
+        var errMsg = 'Errors in Input: ';
+        var chk = false;
+        // console.log(Emailre.test(email.toLowerCase()));
+        if(!Emailre.test(email.toLowerCase())) {
+            errMsg += "\nInvalid Email Entered";
+            chk = true;
+        }
+        if(!(passwd.length >= 8 && passwd.length <= 16)){
+            errMsg += "\nInvalid Password Entered (Between 8 and 16 characters needed)";
+            chk = true;
+        }
+
+        if(!regNoRe.test(regNo.toLowerCase())){
+            errMsg += "\nInvalid Registration Number Entered";
+            chk = true;
+        }
+
+        if(!name || name.length>40){
+            errMsg += "\nPlease confine name length to within 40 characters";
+            chk = true;
+        }
+
+        if(chk){
+            alert(errMsg);
+        }
+        else{
+            var data = JSON.stringify({name: name, regNo:regNo, email:email, passwd:passwd});
+            $.ajax({
+                url: '/signup',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    // console.log(data);
+                    if(data.code && data.code === 1){
+                        alert(data.message);
+                    }
+                    else {
+                        alert("Your registration is successful, please verify your email to login");
+                    }
+                },
+                data:data
+            });
         }
     }
 </script>

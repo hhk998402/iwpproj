@@ -23,16 +23,14 @@
                     <h4 class="modal-title">Enter Group ID</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <!--<p>Some text in the modal.</p>-->
-                        <input type="text" placeholder="Enter your Group ID">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <!--<p>Some text in the modal.</p>-->
+                    <input type="text" placeholder="Enter your Group ID" id="clubID">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addClub();">Submit</button>
+                </div>
             </div>
 
         </div>
@@ -101,11 +99,18 @@
 </nav>
 
 <div class="container-fluid" style="margin-top:80px">
-    <h3 style="text-align:center;">Welcome, Hemant H Kumar</h3>
+    <h3 style="text-align:center;" id="welcomeMsg">Welcome, </h3>
     <p> </p>
     <header>
         <h3 style="text-align:center; color:salmon">Your TimeTable:</h3>
     </header>
+    <div class="timeTableError" style="text-align:center;">
+        <p>You have not uploaded a timetable yet</p>
+        <form action="/timeTableUpload" method="post">
+            <input type="file" accept=".png,.jpg">
+            <input type="submit">
+        </form>
+    </div>
 
     <table class="responsive-table">
         <tr class="table-header">
@@ -204,13 +209,47 @@
 </div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    var input = document.querySelectorAll('input');
-    var i;
-    for(i=0; i<input.length; i++){
-        input[i].setAttribute('size',input[i].getAttribute('placeholder').length+2);
+    function addClub(){
+        console.log("HERE");
+        var clubID = document.getElementById("clubID").value;
+        var data = JSON.stringify({clubID:clubID});
+        $.ajax({
+            url: '/addClub',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                // console.log(data);
+                if(data.code && data.code === 1){
+                    alert(data.message);
+                }
+                else {
+                    window.location.replace('/home');
+                }
+            },
+            data:data
+        });
     }
 </script>
+<script>
+    var timeTable = <%-JSON.stringify(timeTable)%>;
+    $(".timeTableError").hide();
+    console.log(timeTable);
+    if(!timeTable){
+        $(".timeTableError").show();
+        $(".responsive-table").hide();
+    }
+    $("#welcomeMsg").text("Welcome, "+<%-JSON.stringify(name)%>);
+    <!--console.log(<%-JSON.stringify(name)%>);-->
+    // var input = document.querySelectorAll('input');
+    // var i;
+    // for(i=0; i<input.length; i++){
+    //     input[i].setAttribute('size',input[i].getAttribute('placeholder').length+2);
+    // }
+</script>
+
 </html>
 
 

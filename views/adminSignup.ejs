@@ -1,0 +1,145 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="container" style="border:1px solid black; border-radius: 20px;padding:40px;">
+        <h2 align="center">ADMIN LOGIN</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="first">Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Name of a Board Member (who is responsible for club login)" id="name" name="name">
+                </div>
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="last">Club Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Club Name" id="club" name="club">
+                </div>
+            </div>
+            <!--  col-md-6   -->
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="company">EMail ID</label>
+                    <input type="email" class="form-control" placeholder="Enter one common EMail ID for the club" id="email" name="email">
+                </div>
+
+
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="phone">Number of members in the club</label>
+                    <input type="number" class="form-control" id="members" placeholder="Enter number of members in the club" name="members">
+                </div>
+            </div>
+            <!--  col-md-6   -->
+        </div>
+        <!--  row   -->
+
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="email">Password</label>
+                    <input type="email" class="form-control" id="passwd" placeholder="Enter Password" name="passwd">
+                </div>
+            </div>
+            <!--  col-md-6   -->
+        </div>
+        <!--  row   -->
+
+        <label for="newsletter">Do you agree to receive EMails regarding activities of your club?</label>
+        <div class="checkbox">
+
+            <label>
+                <input type="checkbox" value="Sure!" id="emailConsent" name="emailConsent"> Sure!
+            </label>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" onclick="signupAuth();">Submit</button>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    function signupAuth(){
+        var email = document.getElementById("email").value;
+        var passwd = document.getElementById("passwd").value;
+        var name = document.getElementById("name").value;
+        var members = document.getElementById("members").value;
+        var club = document.getElementById("club").value;
+        var emailConsent = $("#emailConsent").is(":checked");
+
+        var Emailre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var membersRe = /^[1-9][0-9]{1}$/;
+
+        var errMsg = 'Errors in Input: ';
+        var chk = false;
+        // console.log(Emailre.test(email.toLowerCase()));
+        if(!Emailre.test(email.toLowerCase())) {
+            errMsg += "\nInvalid Email Entered";
+            chk = true;
+        }
+        if(!(passwd.length >= 8 && passwd.length <= 16)){
+            errMsg += "\nInvalid Password Entered (Between 8 and 16 characters needed)";
+            chk = true;
+        }
+
+        if(!membersRe.test(members)){
+            errMsg += "\nInvalid Number of Members in Club Entered";
+            chk = true;
+        }
+
+        if(!name || name.length>40){
+            errMsg += "\nPlease confine Name length to within 40 characters";
+            chk = true;
+        }
+
+        if(!club || club.length>40){
+            errMsg += "\nPlease confine Club length to within 40 characters";
+            chk = true;
+        }
+
+        if(!emailConsent){
+            errMsg += "\nPlease allow EMail Sending to continue";
+            chk = true;
+        }
+
+        if(chk){
+            alert(errMsg);
+        }
+        else{
+            var data = JSON.stringify({name: name, members:members, email:email, passwd:passwd, club:club});
+            $.ajax({
+                url: '/adminSignup',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    // console.log(data);
+                    if(data.code && data.code === 1){
+                        alert(data.message);
+                    }
+                    else {
+                        alert("Your registration is successful, please verify your email to login");
+                    }
+                },
+                data:data
+            });
+        }
+    }
+</script>
+</body>
+</html>
+
